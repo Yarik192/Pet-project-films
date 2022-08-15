@@ -31,13 +31,24 @@ class Producer(models.Model):
         verbose_name_plural = "Режиссёры"
 
 
+class Country(models.Model):
+    title = models.CharField(verbose_name="Название", max_length=20)
+
+    def __str__(self):
+        return f"{self.title}"
+
+    class Meta:
+        verbose_name = "Страна"
+        verbose_name_plural = "Страны"
+
+
 class Film(models.Model):
     title = models.CharField(verbose_name="Название", max_length=80)
     poster = models.ImageField(verbose_name="Изображение", height_field=200, width_field=300)
     description = models.TextField(verbose_name="Описание")
     year = models.IntegerField(verbose_name="Год",
                                validators=[MinValueValidator(1895), MaxValueValidator(datetime.now().year)])
-    country = models.CharField(verbose_name="Страна", max_length=50)
+    country = models.ManyToManyField(Country)
     genre = models.ManyToManyField(Genre)
     duration = models.CharField(max_length=4, verbose_name="Продолжительность")
     premiere = models.CharField(verbose_name="Премьера фильма", max_length=16)
