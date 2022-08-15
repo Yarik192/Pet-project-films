@@ -6,6 +6,16 @@
     <title>Главная</title>
 </head>
 <body>
-    {{film}}
+    {% for el in film %}
+    {{el}}<br>
+    <img src="{{ MEDIA_URL }}{{ el.poster.url }}", height="200"/><br>
+    {{el.description}}<br>
+    {{el.year}}<br>
+    {{el.country}}<br>
+    {{el.genre}}<br>
+    {{el.duration}}<br>
+    {{el.premiere}}<br>
+    {{el.producer}}<br>
+    {% endfor %}
 </body>
 </html>
