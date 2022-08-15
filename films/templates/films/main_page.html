@@ -11,11 +11,17 @@
     <img src="{{ MEDIA_URL }}{{ el.poster.url }}", height="200"/><br>
     {{el.description}}<br>
     {{el.year}}<br>
-    {{el.country}}<br>
-    {{el.genre}}<br>
+    {% for i in el.country.all  %}
+        {{ i.title }}
+    {% endfor %}<br>
+    {% for i in el.genre.all  %}
+        {{ i.title }}
+    {% endfor %}<br>
     {{el.duration}}<br>
     {{el.premiere}}<br>
-    {{el.producer}}<br>
+    {% for i in el.producer.all  %}
+        {{ i.title }}
+    {% endfor %}<br>
     {% endfor %}
 </body>
 </html>
