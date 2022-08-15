@@ -44,16 +44,17 @@ class Country(models.Model):
 
 class Film(models.Model):
     title = models.CharField(verbose_name="Название", max_length=80)
-    poster = models.ImageField(verbose_name="Изображение", height_field=200, width_field=300)
+    poster = models.ImageField(verbose_name="Изображение")
     description = models.TextField(verbose_name="Описание")
     year = models.IntegerField(verbose_name="Год",
                                validators=[MinValueValidator(1895), MaxValueValidator(datetime.now().year)])
-    country = models.ManyToManyField(Country)
-    genre = models.ManyToManyField(Genre)
-    duration = models.CharField(max_length=4, verbose_name="Продолжительность")
-    premiere = models.CharField(verbose_name="Премьера фильма", max_length=16)
-    producer = models.ManyToManyField(Producer)
+    country = models.ManyToManyField(Country, verbose_name="Страны")
+    genre = models.ManyToManyField(Genre, verbose_name="Жанры")
+    duration = models.CharField(max_length=7, verbose_name="Продолжительность")
+    premiere = models.CharField(verbose_name="Премьера фильма", max_length=17)
+    producer = models.ManyToManyField(Producer, verbose_name="Режиссёры")
     film_file = models.FileField()
+    
 
     def __str__(self):
         return f"{self.title} ({self.year})"
