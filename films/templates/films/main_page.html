@@ -1,27 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
-</head>
-<body>
+{% extends 'base.html' %}    
+    
+{% block title %}
+    Главная
+{% endblock %}    
+
+{% block content %}
     {% for el in film %}
-    {{el}}<br>
-    <img src="{{ MEDIA_URL }}{{ el.poster.url }}", height="200"/><br>
-    {{el.description}}<br>
-    {{el.year}}<br>
-    {% for i in el.country.all  %}
-        {{ i.title }}
-    {% endfor %}<br>
-    {% for i in el.genre.all  %}
-        {{ i.title }}
-    {% endfor %}<br>
-    {{el.duration}}<br>
-    {{el.premiere}}<br>
-    {% for i in el.producer.all  %}
-        {{ i.title }}
-    {% endfor %}<br>
+        {{el}}<br>
+        <img src="{{ MEDIA_URL }}{{ el.poster.url }}", height="200"/><br>
+        {{el.description}}<br>
+        {{el.year}}<br>
+        {% for i in el.country.all  %}
+            {{ i.title }}
+        {% endfor %}<br>
+        {% for i in el.genre.all  %}
+            {{ i.title }}
+        {% endfor %}<br>
+        {{el.duration}}<br>
+        {{el.premiere}}<br>
+        {% for i in el.producer.all  %}
+            {{ i.title }}
+        {% endfor %}<br>
     {% endfor %}
-</body>
-</html>
+{% endblock %}
