@@ -1,14 +1,18 @@
 from datetime import datetime
-
+from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 
 class Genre(models.Model):
     title = models.CharField(verbose_name="Название", max_length=20)
+    slug = models.SlugField(null=True)
 
     def __str__(self):
         return f"{self.title}"
+
+    def get_absolute_url(self):
+        return reverse("genre_page", kwargs={"slug": self.slug})
 
     class Meta:
         verbose_name = "Жанр"
@@ -18,6 +22,7 @@ class Genre(models.Model):
 class Producer(models.Model):
     first_name = models.CharField(verbose_name="Имя", max_length=30)
     last_name = models.CharField(verbose_name="Фамилия", max_length=30)
+    slug = models.SlugField(null=True)
 
     @property
     def full_name(self):
@@ -26,6 +31,9 @@ class Producer(models.Model):
     def __str__(self):
         return f"{self.full_name}"
 
+    def get_absolute_url(self):
+        return reverse("page", kwargs={"slug": self.slug})
+
     class Meta:
         verbose_name = "Режиссёр"
         verbose_name_plural = "Режиссёры"
@@ -33,9 +41,13 @@ class Producer(models.Model):
 
 class Country(models.Model):
     title = models.CharField(verbose_name="Название", max_length=20)
+    slug = models.SlugField(null=True)
 
     def __str__(self):
         return f"{self.title}"
+
+    def get_absolute_url(self):
+        return reverse("country_page", kwargs={"slug": self.slug})
 
     class Meta:
         verbose_name = "Страна"

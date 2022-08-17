@@ -12,8 +12,30 @@
 	<link rel="stylesheet" href="{% static 'base.css'%}" type="text/css">
 </head>
 <body>
-	{% block content %}
-    	
+    {% for film in films %}
+        {{film}}<br>
+        <img src="{{ MEDIA_URL }}{{ film.poster.url }}", height="200"/><br>
+        {{film.description}}<br>
+        {{film.year}}<br>
+        {% for country in film.country.all  %}
+            {{ country.title }}
+        {% endfor %}<br>
+        {% for genre in film.genre.all  %}
+            {{ genre.title }}
+        {% endfor %}<br>
+        {{film.duration}}<br>
+        {{film.premiere}}<br>
+        {% for producer in film.producer.all  %}
+            {{ produser.title }}
+        {% endfor %}<br>
+    {% endfor %}
+    {% for genre in all_genre %}
+        <a href="{{ genre.get_absolute_url }}">{{ genre.title }}</a><br>
+    {% endfor %}
+    {% for country in all_country %}
+        <a href="{{ country.get_absolute_url }}">{{ country.title }}</a><br>
+    {% endfor %}
+    {% block content %}
     {% endblock %}
 	</body>
 </html>
