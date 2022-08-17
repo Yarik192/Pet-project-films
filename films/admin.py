@@ -11,13 +11,13 @@ class FilmAdmin(admin.ModelAdmin):
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("title",)}
 
 
 @admin.register(Producer)
 class ProducerAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("first_name","last_name")}
 
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("title",)}

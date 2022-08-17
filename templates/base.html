@@ -18,22 +18,24 @@
         {{film.description}}<br>
         {{film.year}}<br>
         {% for country in film.country.all  %}
-            {{ country.title }}
+            <a href="{{ country.get_absolute_url }}">{{ country }}</a><br>
         {% endfor %}<br>
         {% for genre in film.genre.all  %}
-            {{ genre.title }}
+            <a href="{{ genre.get_absolute_url }}">{{ genre }}</a><br>
         {% endfor %}<br>
         {{film.duration}}<br>
         {{film.premiere}}<br>
-        {% for producer in film.producer.all  %}
-            {{ produser.title }}
+        {% for producer in film.producer.all %}
+            <a href="{{ producer.get_absolute_url }}">{{ producer }}</a><br>
         {% endfor %}<br>
     {% endfor %}
+    <p>Жанры:</p>
     {% for genre in all_genre %}
-        <a href="{{ genre.get_absolute_url }}">{{ genre.title }}</a><br>
+        <a href="{{ genre.get_absolute_url }}">{{ genre }}</a><br>
     {% endfor %}
+    <p>Страны:</p>
     {% for country in all_country %}
-        <a href="{{ country.get_absolute_url }}">{{ country.title }}</a><br>
+        <a href="{{ country.get_absolute_url }}">{{ country }}</a><br>
     {% endfor %}
     {% block content %}
     {% endblock %}

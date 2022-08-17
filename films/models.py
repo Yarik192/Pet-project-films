@@ -6,7 +6,7 @@ from django.db import models
 
 class Genre(models.Model):
     title = models.CharField(verbose_name="Название", max_length=20)
-    slug = models.SlugField(null=True)
+    slug = models.SlugField()
 
     def __str__(self):
         return f"{self.title}"
@@ -22,7 +22,7 @@ class Genre(models.Model):
 class Producer(models.Model):
     first_name = models.CharField(verbose_name="Имя", max_length=30)
     last_name = models.CharField(verbose_name="Фамилия", max_length=30)
-    slug = models.SlugField(null=True)
+    slug = models.SlugField()
 
     @property
     def full_name(self):
@@ -32,7 +32,7 @@ class Producer(models.Model):
         return f"{self.full_name}"
 
     def get_absolute_url(self):
-        return reverse("page", kwargs={"slug": self.slug})
+        return reverse("producer_page", kwargs={"slug": self.slug})
 
     class Meta:
         verbose_name = "Режиссёр"
@@ -41,7 +41,7 @@ class Producer(models.Model):
 
 class Country(models.Model):
     title = models.CharField(verbose_name="Название", max_length=20)
-    slug = models.SlugField(null=True)
+    slug = models.SlugField()
 
     def __str__(self):
         return f"{self.title}"
@@ -66,7 +66,6 @@ class Film(models.Model):
     premiere = models.CharField(verbose_name="Премьера фильма", max_length=17)
     producer = models.ManyToManyField(Producer, verbose_name="Режиссёры")
     film_file = models.FileField()
-    
 
     def __str__(self):
         return f"{self.title} ({self.year})"
