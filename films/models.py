@@ -54,12 +54,27 @@ class Country(models.Model):
         verbose_name_plural = "Страны"
 
 
+class Year(models.Model):
+    year = models.IntegerField(verbose_name="Год",
+                               validators=[MinValueValidator(1895), MaxValueValidator(datetime.now().year)])
+    slug = models.SlugField()
+
+    def __str__(self):
+        return f"{self.year}"
+
+    def get_absolute_url(self):
+        return reverse("year_page", kwargs={"slug": self.slug})
+
+    class Meta:
+        verbose_name = "Год"
+        verbose_name_plural = "Года"
+
+
 class Film(models.Model):
     title = models.CharField(verbose_name="Название", max_length=80)
     poster = models.ImageField(verbose_name="Изображение")
     description = models.TextField(verbose_name="Описание")
-    year = models.IntegerField(verbose_name="Год",
-                               validators=[MinValueValidator(1895), MaxValueValidator(datetime.now().year)])
+    year = models.ForeignKey(Year, verbose_name="Год", on_delete = models.DO_NOTHING)
     country = models.ManyToManyField(Country, verbose_name="Страны")
     genre = models.ManyToManyField(Genre, verbose_name="Жанры")
     duration = models.CharField(max_length=7, verbose_name="Продолжительность")

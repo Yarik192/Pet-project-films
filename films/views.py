@@ -8,6 +8,7 @@ class AllGenreAllCountryMixin(ContextMixin):
         context = super().get_context_data(**kwargs)
         context["all_genre"] = Genre.objects.all()
         context["all_country"] = Country.objects.all()
+        context["all_year"] = Year.objects.all()
         return context
 
 
@@ -42,3 +43,12 @@ class ProducerPage(AllGenreAllCountryMixin, ListView):
 
     def get_queryset(self, *args, **kwargs):
         return Film.objects.filter(producer__slug=self.kwargs['slug'])
+
+
+class YearPage(AllGenreAllCountryMixin, ListView):
+    model = Year
+    template_name = "films/year_page.html"
+    context_object_name = "films"
+
+    def get_queryset(self, *args, **kwargs):
+        return Film.objects.filter(year__slug=self.kwargs['slug'])
