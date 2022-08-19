@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		{% block title %}
+
+		{% endblock %}
+	</title>
+	<link rel="stylesheet" href="{% static 'base.css'%}" type="text/css">
+</head>
+<body>
+    {% for film in films %}
+        {{film}}<br>
+        <img src="{{ MEDIA_URL }}{{ film.poster.url }}", height="200"/><br>
+        {{film.description}}<br>
+        <a href="{{ film.year.get_absolute_url }}">{{ film.year }}</a><br>
+        {% for country in film.country.all  %}
+            <a href="{{ country.get_absolute_url }}">{{ country }}</a><br>
+        {% endfor %}
+        {% for genre in film.genre.all  %}
+            <a href="{{ genre.get_absolute_url }}">{{ genre }}</a><br>
+        {% endfor %}
+        {{film.duration}}<br>
+        {{film.premiere}}<br>
+        {% for producer in film.producer.all %}
+            <a href="{{ producer.get_absolute_url }}">{{ producer }}</a><br>
+        {% endfor %}
+    {% endfor %}
+    <p>Жанры:</p>
+    {% for genre in all_genre %}
+        <a href="{{ genre.get_absolute_url }}">{{ genre }}</a><br>
+    {% endfor %}
+    <p>Страны:</p>
+    {% for country in all_country %}
+        <a href="{{ country.get_absolute_url }}">{{ country }}</a><br>
+    {% endfor %}
+    <p>Года</p>
+    {% for year in all_year %}
+        <a href="{{ year.get_absolute_url }}">{{ year }}</a><br>
+    {% endfor %}
+    <a href="{% url 'main_page' %}">Главная</a><br>
+    {% block content %}
+    {% endblock %}
+	</body>
+</html>
