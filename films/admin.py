@@ -4,9 +4,16 @@ from django.contrib import admin
 from films.models import Film, Genre, Producer, Country, Year
 
 
+class CountryInline(admin.TabularInline):
+    model = Country
+    extra = 0
+
+
 @admin.register(Film)
 class FilmAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
+    inlines = (CountryInline,)
+
     # readonly_fields = ("slug",)
     #
     # def __init__(self, *args, **kwargs):
@@ -19,7 +26,7 @@ class FilmAdmin(admin.ModelAdmin):
     #     fields = []
     #     if obj:
     #         fields += ['slug']
-    #     return fields
+    #     return fields  # TODO
 
 
 @admin.register(Genre)

@@ -42,6 +42,7 @@ class Producer(models.Model):
 class Country(models.Model):
     title = models.CharField(verbose_name="Название", max_length=20)
     slug = models.SlugField(unique=True)
+    film = models.ForeignKey("Film", on_delete=models.DO_NOTHING, blank=True, null=True)
 
     def __str__(self):
         return f"{self.title}"
@@ -75,8 +76,7 @@ class Film(models.Model):
     slug = models.SlugField(unique=True)
     poster = models.ImageField(verbose_name="Изображение")
     description = models.TextField(verbose_name="Описание")
-    year = models.ForeignKey(Year, verbose_name="Год", on_delete = models.DO_NOTHING)
-    country = models.ManyToManyField(Country, verbose_name="Страны")
+    year = models.ForeignKey(Year, verbose_name="Год", on_delete=models.DO_NOTHING)
     genre = models.ManyToManyField(Genre, verbose_name="Жанры")
     duration = models.CharField(max_length=7, verbose_name="Продолжительность")
     premiere = models.CharField(verbose_name="Премьера фильма", max_length=17)
