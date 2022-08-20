@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "films"
+    "films",
+    "social_django",
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "social_django.context_processors.backends",
             ],
         },
     },
@@ -72,6 +74,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "kinogo_zone.wsgi.application"
 
+AUTHENTICATION_BACKENDS = (
+    "social_core.backends.vk.VKOAuth2",          # бекенд авторизации через ВКонтакте
+    "django.contrib.auth.backends.ModelBackend", # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
+)
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = "51406217"
+SOCIAL_AUTH_VK_OAUTH2_SECRET = "73ynlh9JHV8T7lU5zwJQ"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -126,6 +135,7 @@ STATICFILES_DIRS = [
 MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+LOGIN_REDIRECT_URL="/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

@@ -35,6 +35,13 @@
                     <a class="nav-link" href="{% url "main_page" %}">Главная</a>
                 </li>
             </ul>
+            {% if not user.is_authenticated %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="/login/vk-oauth2">Войти через ВК</a>
+                    </li>
+                </ul>
+            {% endif %}    
             {#            <ul class="navbar-nav align-content-end">#}
             {#                {% if not request.user.is_authenticated %}#}
             {#                    <li class="nav-item">#}
