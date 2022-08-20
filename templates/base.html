@@ -57,7 +57,7 @@
 <div class="main">
     {% for film in films %}
         <div class="films">
-            <b>{{ film.title }}</b>
+            <a href="{% url "film" film.slug %}"><b>{{ film.title }}</b></a>
             <br>
             <br>
 
@@ -104,7 +104,7 @@
     <div class="years">
         <p>Года</p>
         {% for year in all_year %}
-            <a class=" disabled" href="{{ year.get_absolute_url }}">{{ year }}</a><br>
+            <a class="disabled" href="{{ year.get_absolute_url }}">{{ year }}</a><br>
         {% endfor %}
     </div>
     <hr>

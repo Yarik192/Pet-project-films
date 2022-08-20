@@ -6,7 +6,7 @@ from django.db import models
 
 class Genre(models.Model):
     title = models.CharField(verbose_name="Название", max_length=20)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return f"{self.title}"
@@ -22,7 +22,7 @@ class Genre(models.Model):
 class Producer(models.Model):
     first_name = models.CharField(verbose_name="Имя", max_length=30)
     last_name = models.CharField(verbose_name="Фамилия", max_length=30)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
 
     @property
     def full_name(self):
@@ -41,7 +41,7 @@ class Producer(models.Model):
 
 class Country(models.Model):
     title = models.CharField(verbose_name="Название", max_length=20)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return f"{self.title}"
@@ -57,7 +57,7 @@ class Country(models.Model):
 class Year(models.Model):
     year = models.IntegerField(verbose_name="Год",
                                validators=[MinValueValidator(1895), MaxValueValidator(datetime.now().year)])
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return f"{self.year}"
@@ -72,6 +72,7 @@ class Year(models.Model):
 
 class Film(models.Model):
     title = models.CharField(verbose_name="Название", max_length=80)
+    slug = models.SlugField(unique=True)
     poster = models.ImageField(verbose_name="Изображение")
     description = models.TextField(verbose_name="Описание")
     year = models.ForeignKey(Year, verbose_name="Год", on_delete = models.DO_NOTHING)

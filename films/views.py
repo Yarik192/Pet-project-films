@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .models import *
 from django.views.generic.base import ContextMixin
 
@@ -52,3 +52,9 @@ class YearPage(AllGenreAllCountryMixin, ListView):
 
     def get_queryset(self, *args, **kwargs):
         return Film.objects.filter(year__slug=self.kwargs['slug'])
+
+
+class FilmView(DetailView):
+    model = Film
+    pk_url_kwarg = "slug_field"
+    template_name = "films/film_detail.html"

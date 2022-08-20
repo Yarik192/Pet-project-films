@@ -6,7 +6,20 @@ from films.models import Film, Genre, Producer, Country, Year
 
 @admin.register(Film)
 class FilmAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("title",)}
+    # readonly_fields = ("slug",)
+    #
+    # def __init__(self, *args, **kwargs):
+    #
+    #     if not self.instance:
+    #         self.prepopulated_fields = {'slug': ('title',)}
+    #     super(FilmAdmin, self).__init__(*args, **kwargs)
+    #
+    # def get_readonly_fields(self, request, obj=None):
+    #     fields = []
+    #     if obj:
+    #         fields += ['slug']
+    #     return fields
 
 
 @admin.register(Genre)
@@ -16,7 +29,7 @@ class GenreAdmin(admin.ModelAdmin):
 
 @admin.register(Producer)
 class ProducerAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("first_name","last_name")}
+    prepopulated_fields = {"slug": ("first_name", "last_name")}
 
 
 @admin.register(Country)

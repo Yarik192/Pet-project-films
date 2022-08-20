@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ object.title }}
+{% endblock %}
+
+{% block content %}
+
+    {{ object.title }}<br>
+
+    <img src="../../../media/{{ object.poster }}" alt="{{ object.title }}" width="300" height="300"><br>
+    {{ object.description }}<br>
+    {{ object.duration }}<br>
+
+    {% for genre in film.genre.all %}
+        <b>Жанры: </b>{{ genre }}<br>
+    {% endfor %}
+
+    {% for country in film.country.all %}
+        <b>Страны: </b>{{ country }}<br>
+    {% endfor %}
+
+    <video width="600" height="400" controls><br>
+        <source src="../../../media/{{ object.film_file }}" type='video/mp4'>
+        <br>
+        <h1>{{ object.film_file }}</h1>
+    </video><br>
+
+{% endblock content %}
