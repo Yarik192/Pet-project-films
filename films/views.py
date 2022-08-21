@@ -54,7 +54,18 @@ class YearPage(AllGenreAllCountryMixin, ListView):
         return Film.objects.filter(year__slug=self.kwargs['slug'])
 
 
-class FilmView(DetailView):
+class FilmView(AllGenreAllCountryMixin, DetailView):
     model = Film
     pk_url_kwarg = "slug_field"
     template_name = "films/film_detail.html"
+
+
+class SearchPage(AllGenreAllCountryMixin, ListView):
+    model = Film
+    template_name = "films/search_page.html"
+    context_object_name = "films"
+
+    def get_queryset(self, *args, **kwargs):
+        name_film = self.request.GET.get("name_film")
+        return Film.objects.filter(title = name_film)
+

@@ -11,14 +11,21 @@
     <img src="../../../media/{{ object.poster }}" alt="{{ object.title }}" width="300" height="300"><br>
     {{ object.description }}<br>
     {{ object.duration }}<br>
-
+    
+    <b>Жанры: </b>
     {% for genre in film.genre.all %}
-        <b>Жанры: </b>{{ genre }}<br>
-    {% endfor %}
+        {{ genre }}
+    {% endfor %}<br>
 
+    <b>Страны: </b>
     {% for country in film.country.all %}
-        <b>Страны: </b>{{ country }}<br>
-    {% endfor %}
+        {{ country }}
+    {% endfor %}<br>
+
+    <b>Продюсеры: </b>
+    {% for producer in film.producer.all %}
+        {{ producer }}
+    {% endfor %}<br>
 
     <video width="600" height="400" controls><br>
         <source src="../../../media/{{ object.film_file }}" type='video/mp4'>

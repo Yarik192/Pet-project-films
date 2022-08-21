@@ -41,7 +41,14 @@
                         <a href="/login/vk-oauth2">Войти через ВК</a>
                     </li>
                 </ul>
-            {% endif %}    
+            {% endif %}
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <form action="{% url 'search_page' %}" method="get">
+                        <input name="name_film" type="text" placeholder="Search...">
+                    </form>
+                </li>
+            </ul>
             {#            <ul class="navbar-nav align-content-end">#}
             {#                {% if not request.user.is_authenticated %}#}
             {#                    <li class="nav-item">#}
@@ -74,20 +81,23 @@
 
             <b>Год: </b>{{ film.year }}<br>
 
+            <b>Страны: </b>
             {% for country in film.country.all %}
-                <b>Страны: </b>{{ country }}<br>
-            {% endfor %}
-
+                {{ country }}
+            {% endfor %}<br>
+            
+            <b>Жанры: </b>
             {% for genre in film.genre.all %}
-                <b>Жанры: </b>{{ genre }}<br>
-            {% endfor %}
+                {{ genre }}
+            {% endfor %}<br>
 
             <b>Продолжительность: </b>{{ film.duration }}<br>
             <b>Мировая премьера: </b>{{ film.premiere }}<br>
-
+            
+            <b>Продюсеры: </b>
             {% for producer in film.producer.all %}
-                <b>Продюсеры: </b>{{ producer }}<br>
-            {% endfor %}
+                {{ producer }}
+            {% endfor %}<br>
         </div>
     {% endfor %}
     <hr>
