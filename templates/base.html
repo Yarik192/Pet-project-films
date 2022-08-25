@@ -49,24 +49,25 @@
                     </form>
                 </li>
             </ul>
-            {#            <ul class="navbar-nav align-content-end">#}
-            {#                {% if not request.user.is_authenticated %}#}
-            {#                    <li class="nav-item">#}
-            {#                        <a class="nav-link" href="{% url "register" %}">Регистрация</a>#}
-            {#                    </li>#}
-            {#                    <li class="nav-item">#}
-            {#                        <a class="nav-link" href="{% url "login" %}">Войти</a>#}
-            {#                    </li>#}
-            {#                {% else %}#}
-            {#                    <li class="nav-item">#}
-            {#                        <a class="nav-link" href="{% url "logout" %}">Выйти</a>#}
-            {#                    </li>#}
-            {#                {% endif %}#}
-            {#            </ul>#}
+            <ul class="navbar-nav align-content-end">
+                {% if not request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "registration" %}">Регистрация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "login" %}">Войти</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "logout" %}">Выйти</a>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
     </nav>
 {% endblock header %}
 
+{% block content %}
 <body>
 <div class="main">
     {% for film in films %}
@@ -101,6 +102,7 @@
         </div>
     {% endfor %}
     <hr>
+    {% endblock %}
 
     <div class="genres">
         <p>Жанры:</p>
@@ -126,11 +128,5 @@
     </div>
     <hr>
 </div>
-
-
-{% block content %}
-
-{% endblock %}
-
 </body>
 </html>

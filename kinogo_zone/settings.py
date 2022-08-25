@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "films",
     "social_django",
+    "profile_user"
 ]
 
 MIDDLEWARE = [
@@ -115,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "RU"
 
 TIME_ZONE = "UTC"
 
@@ -135,7 +136,9 @@ STATICFILES_DIRS = [
 MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+AUTH_USER_MODEL = "profile_user.CustomUser"
 LOGIN_REDIRECT_URL="/"
+LOGOUT_REDIRECT_URL="/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

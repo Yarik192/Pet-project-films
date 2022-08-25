@@ -5,6 +5,7 @@ from films.models import Film, Genre, Producer, Country, Year
 
 
 class CountryInline(admin.TabularInline):
+    prepopulated_fields = {"slug": ("title",)}
     model = Country
     extra = 0
 
