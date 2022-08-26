@@ -27,6 +27,11 @@
                 {{form.email}}
                 {{form.errors.email}}
             </p>
+            <p> 
+                <label for="id_email">{{form.captcha.label}}</label>
+                {{form.captcha|linebreaks}}
+                {{form.errors.captcha}}
+            </p>
 
         <button type="submit">Зарегистрироваться</button>
     </form>

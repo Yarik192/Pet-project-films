@@ -24,6 +24,7 @@ urlpatterns = [
     path("", include("films.urls")),
     path("", include("profile_user.urls")),
     path("", include("social_django.urls")),
+    path("captcha/", include("captcha.urls"))
 ]
 
 if settings.DEBUG is True:
