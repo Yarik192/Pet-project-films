@@ -1,6 +1,9 @@
 from django.views.generic import ListView, DetailView
 from .models import *
 from django.views.generic.base import ContextMixin
+from django.views.generic.edit import FormMixin
+from profile_user.forms import CommentForm
+from django.urls import reverse_lazy
 
 
 class AllGenreAllCountryMixin(ContextMixin):
@@ -54,10 +57,28 @@ class YearPage(AllGenreAllCountryMixin, ListView):
         return Film.objects.filter(year__slug=self.kwargs['slug'])
 
 
-class FilmView(AllGenreAllCountryMixin, DetailView):
+class FilmView(AllGenreAllCountryMixin, DetailView, FormMixin):
     model = Film
+    form_class = CommentForm
     pk_url_kwarg = "slug_field"
     template_name = "films/film_detail.html"
+    
+    def get_success_url(self, *args, **kwargs):
+        return reverse_lazy("film", kwargs={"slug":self.get_object().slug})
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid:
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.author = self.request.user
+        self.object.film = self.get_object()
+        self.object.save()
+        return super().form_valid(form)
 
 
 class SearchPage(AllGenreAllCountryMixin, ListView):

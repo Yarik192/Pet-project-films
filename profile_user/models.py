@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
 class Comment(models.Model):
 	film = models.ForeignKey(Film,
 		                       verbose_name="Фильм",
-		                       related_name='film',
+		                       related_name='comments',
 		                       on_delete=models.DO_NOTHING
 		                       )
 	author = models.ForeignKey(CustomUser,
@@ -21,3 +21,6 @@ class Comment(models.Model):
 	text = models.TextField(verbose_name="Текст", max_length=300)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
+
+	def __str__(self):
+		return f"{self.author} {self.text}"

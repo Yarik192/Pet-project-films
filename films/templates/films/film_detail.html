@@ -33,4 +33,16 @@
         <h1>{{ object.film_file }}</h1>
     </video><br>
 
+    <p> Коментарии </p>
+
+    {% for comment in object.comments.all %}
+        {{comment}}<br>
+    {% endfor %}
+
+    <form method="post" action= "">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit">Отправить коментарий</button>
+    </form>
+
 {% endblock content %}
