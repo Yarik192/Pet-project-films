@@ -57,7 +57,9 @@ class Country(models.Model):
 
 class Year(models.Model):
     year = models.IntegerField(verbose_name="Год",
-                               validators=[MinValueValidator(1895), MaxValueValidator(datetime.now().year)])
+                               validators=[MinValueValidator(1895),
+                               MaxValueValidator(datetime.now().year)]
+                               )
     slug = models.SlugField(unique=True)
 
     def __str__(self):
